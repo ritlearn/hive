@@ -1,0 +1,81 @@
+Compression algorithms
+------------------------
+		lzo
+		gzip
+		snappy
+		bzip2
+		deflate
+
+File Formats
+-------------------
+ORC
+Parquet
+AVRO -- Schema changes
+SequenceFile
+
+1. Compressed  
+2. Row columnar
+3. Efficent
+4. Faster
+5. Splittable; 
+4GB - 32 blocks
+
+
+14,3,741,730,912,849,PS,1451,NA,91,79,NA,23,11,SAN,SFO,447,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+15,4,729,730,903,849,PS,1451,NA,94,79,NA,14,-1,SAN,SFO,447,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+17,6,741,730,918,849,PS,1451,NA,97,79,NA,29,11,SAN,SFO,447,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+18,7,729,730,847,849,PS,1451,NA,78,79,NA,-2,-1,SAN,SFO,447,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+
+
+14,15,17,18..
+3,4,5,6,..
+741,729,741,729..
+
+
+create table airline_22.onTimePerf_parquet
+(
+DayofMonth INT ,
+DayOfWeek INT ,
+DepTime INT ,
+CRSDepTime INT ,
+ArrTime INT ,
+CRSArrTime INT ,
+UniqueCarrier STRING ,
+FlightNum INT ,
+TailNum STRING ,
+ActualElapsedTime INT ,
+CRSElapsedTime INT ,
+AirTime STRING ,
+ArrDelay INT ,
+DepDelay INT ,
+Origin STRING ,
+Dest STRING ,
+Distance INT ,
+TaxiIn STRING ,
+TaxiOut STRING ,
+Cancelled INT ,
+CancellationCode STRING ,
+Diverted INT ,
+CarrierDelay STRING ,
+WeatherDelay STRING ,
+NASDelay STRING ,
+SecurityDelay STRING ,
+LateAircraftDelay STRING)
+PARTITIONED BY (Year INT, Month INT )
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS PARQUETFILE;
+
+SET hive.exec.compress.output=true;
+SET mapred.output.compression.codec=org.apache.hadoop.io.compress.SnappyCodec;
+SET mapred.output.compression.type=BLOCK;
+SET parquet.compression=snappy;
+SET mapreduce.map.java.opts=-Xmx6g;
+SET mapreduce.map.memory.mb=2816;
+SET hive.exec.max.dynamic.partitions.pernode=10000;
+SET mapred.max.split.size=256000000;
+SET hive.exec.dynamic.partition.mode=nonstrict;
+SET hive.exec.dynamic.partition=true;
+SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+INSERT OVERWRITE TABLE airline_22.onTimePerf_parquet PARTITION(Year, Month) SELECT DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier, FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin, Dest, Distance, TaxiIn, TaxiOut, Cancelled, CancellationCode, Diverted, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay, Year, Month FROM stg_airline_22.onTimePerf;
+

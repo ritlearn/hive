@@ -1,0 +1,129 @@
+
+
+tail -n +2 NYSE/NYSE_daily_prices_A.csv > NYSE/NYSE_daily_prices_A_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_B.csv > NYSE/NYSE_daily_prices_B_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_C.csv > NYSE/NYSE_daily_prices_C_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_D.csv > NYSE/NYSE_daily_prices_D_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_E.csv > NYSE/NYSE_daily_prices_E_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_F.csv > NYSE/NYSE_daily_prices_F_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_G.csv > NYSE/NYSE_daily_prices_G_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_H.csv > NYSE/NYSE_daily_prices_H_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_I.csv > NYSE/NYSE_daily_prices_I_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_J.csv > NYSE/NYSE_daily_prices_J_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_K.csv > NYSE/NYSE_daily_prices_K_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_L.csv > NYSE/NYSE_daily_prices_L_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_M.csv > NYSE/NYSE_daily_prices_M_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_N.csv > NYSE/NYSE_daily_prices_N_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_O.csv > NYSE/NYSE_daily_prices_O_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_P.csv > NYSE/NYSE_daily_prices_P_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_Q.csv > NYSE/NYSE_daily_prices_Q_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_R.csv > NYSE/NYSE_daily_prices_R_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_S.csv > NYSE/NYSE_daily_prices_S_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_T.csv > NYSE/NYSE_daily_prices_T_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_U.csv > NYSE/NYSE_daily_prices_U_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_V.csv > NYSE/NYSE_daily_prices_V_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_W.csv > NYSE/NYSE_daily_prices_W_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_X.csv > NYSE/NYSE_daily_prices_X_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_Y.csv > NYSE/NYSE_daily_prices_Y_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_daily_prices_Z.csv > NYSE/NYSE_daily_prices_Z_withoutfirstrow.csv
+
+
+tail -n +2 NYSE/NYSE_dividends_A.csv > NYSE/NYSE_dividends_A_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_B.csv > NYSE/NYSE_dividends_B_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_C.csv > NYSE/NYSE_dividends_C_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_D.csv > NYSE/NYSE_dividends_D_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_E.csv > NYSE/NYSE_dividends_E_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_F.csv > NYSE/NYSE_dividends_F_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_G.csv > NYSE/NYSE_dividends_G_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_H.csv > NYSE/NYSE_dividends_H_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_I.csv > NYSE/NYSE_dividends_I_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_J.csv > NYSE/NYSE_dividends_J_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_K.csv > NYSE/NYSE_dividends_K_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_L.csv > NYSE/NYSE_dividends_L_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_M.csv > NYSE/NYSE_dividends_M_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_N.csv > NYSE/NYSE_dividends_N_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_O.csv > NYSE/NYSE_dividends_O_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_P.csv > NYSE/NYSE_dividends_P_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_Q.csv > NYSE/NYSE_dividends_Q_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_R.csv > NYSE/NYSE_dividends_R_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_S.csv > NYSE/NYSE_dividends_S_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_T.csv > NYSE/NYSE_dividends_T_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_U.csv > NYSE/NYSE_dividends_U_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_V.csv > NYSE/NYSE_dividends_V_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_W.csv > NYSE/NYSE_dividends_W_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_X.csv > NYSE/NYSE_dividends_X_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_Y.csv > NYSE/NYSE_dividends_Y_withoutfirstrow.csv
+tail -n +2 NYSE/NYSE_dividends_Z.csv > NYSE/NYSE_dividends_Z_withoutfirstrow.csv
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS dividends (
+ymd STRING,
+dividend FLOAT,
+exchange STRING, 
+symbol STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+LOCATION '/user/hduser/mylocatin';
+
+
+
+load data local inpath 'NYSE/NYSE_daily_prices_A_withoutfirstrow.csv' overwrite into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_B_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_C_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_D_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_E_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_F_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_G_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_H_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_I_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_J_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_K_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_L_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_M_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_N_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_O_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_P_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_Q_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_R_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_S_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_T_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_U_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_V_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_W_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_X_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_Y_withoutfirstrow.csv' into table stocks;
+load data local inpath 'NYSE/NYSE_daily_prices_Z_withoutfirstrow.csv' into table stocks;
+
+
+
+load data local inpath 'NYSE/NYSE_dividends_A_withoutfirstrow.csv' overwrite into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_B_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_C_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_D_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_E_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_F_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_G_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_H_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_I_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_J_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_K_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_L_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_M_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_N_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_O_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_P_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_Q_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_R_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_S_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_T_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_U_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_V_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_W_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_X_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_Y_withoutfirstrow.csv' into table dividends;
+load data local inpath 'NYSE/NYSE_dividends_Z_withoutfirstrow.csv' into table dividends;
+
+
+SELECT a.ymd, a.price_close, b.price_close FROM stocks a JOIN stocks b ON a.ymd = b.ymd WHERE  a.symbol = 'AAPL' AND b.symbol = 'IBM';
+
+
+SELECT s.ymd, s.symbol, s.price_close, d.dividend FROM stocks s JOIN dividends d ON s.ymd = d.ymd AND s.symbol = d.symbol WHERE s.symbol = 'AAPL';

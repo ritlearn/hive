@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------------
+
+create external table e_NYSE_DAILY_PRICES_HIVE ( s_exchange
+string, stock_symbol string, tdate date, stock_price_open DOUBLE,
+stock_price_high DOUBLE, stock_price_low DOUBLE, stock_price_close DOUBLE,
+stock_volume bigint, stock_price_adj_close DOUBLE ) 
+row format delimited fields terminated by ','
+location '/user/cloudera/batch20/fin/ext'
+TBLPROPERTIES ("skip.header.line.count"="1");
+
+load data local inpath '/home/cloudera/Desktop/batch21/NASDAQ_daily_prices_*.csv' overwrite into table e_NYSE_DAILY_PRICES_HIVE;
+
+-------------------------------------------------------------------------------------------
+create table i_NYSE_DAILY_PRICES_HIVE ( s_exchange
+string, stock_symbol string, tdate date, stock_price_open DOUBLE,
+stock_price_high DOUBLE, stock_price_low DOUBLE, stock_price_close DOUBLE,
+stock_volume bigint, stock_price_adj_close DOUBLE ) 
+row format delimited fields terminated by ','
+location '/user/cloudera/batch20/fin/int'
+TBLPROPERTIES ("skip.header.line.count"="1");
+
+load data local inpath '/home/cloudera/Desktop/batch21/NASDAQ_daily_prices_*.csv' overwrite into table i_NYSE_DAILY_PRICES_HIVE;

@@ -1,0 +1,53 @@
+
+
+
+load data local inpath 'NYSE/NYSE_daily_prices_A.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_B.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_C.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_D.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_E.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_F.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_G.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_H.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_I.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_J.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_K.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_L.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_M.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_N.csv' into table stocks ;
+load data local inpath 'NYSE/NYSE_daily_prices_O.csv' into table stocks ;
+
+
+
+
+create table NYSE_DAILY_PRICES_HIVE 
+( 
+exchange string,
+stock_symbol string, 
+tdate timestamp,
+stock_price_open DOUBLE,
+stock_price_high DOUBLE, 
+stock_price_low DOUBLE, 
+stock_price_close DOUBLE,
+stock_volume bigint, 
+stock_price_adj_close DOUBLE
+)
+row format delimited
+fields terminated by ',';
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS stocks (
+exchange STRING,
+symbol STRING,
+ymd STRING,
+price_open FLOAT,
+price_high FLOAT,
+price_low FLOAT,
+price_close FLOAT,
+volume INT,
+price_adj_close FLOAT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LOCATION '/user/hduser/mylocatin';
+
+
+
+SELECT a.ymd, a.price_close, b.price_close FROM stocks a JOIN stocks b ON a.ymd =b.ymd WHERE a.symbol = 'AAPL' AND b.symbol = 'IBM';

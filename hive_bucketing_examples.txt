@@ -1,0 +1,76 @@
+create table airline_22.onTimePerf_bucketed_no_part
+(DayofMonth INT ,
+DayOfWeek INT ,
+DepTime INT ,
+CRSDepTime INT ,
+ArrTime INT ,
+CRSArrTime INT ,
+UC STRING ,
+FlightNum INT ,
+TailNum STRING ,
+ActualElapsedTime INT ,
+CRSElapsedTime INT ,
+AirTime STRING ,
+ArrDelay INT ,
+DepDelay INT ,
+Origin STRING ,
+Dest STRING ,
+Distance INT ,
+TaxiIn STRING ,
+TaxiOut STRING ,
+Cancelled INT ,
+CancellationCode STRING ,
+Diverted INT ,
+CarrierDelay STRING ,
+WeatherDelay STRING ,
+NASDelay STRING ,
+SecurityDelay STRING ,
+LateAircraftDelay STRING)
+CLUSTERED BY (UC) SORTED BY (FlightNum) INTO 10 BUCKETS
+STORED AS SEQUENCEFILE;
+
+Set hive.enforce.bucketing = true;
+INSERT OVERWRITE TABLE airline_22.onTimePerf_bucketed_no_part SELECT DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier, FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin, Dest, Distance, TaxiIn, TaxiOut, Cancelled, CancellationCode, Diverted, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay FROM stg_airline_22.onTimePerf;
+
+
+create table airline_22.onTimePerf_bucketed_partitioned
+(DayofMonth INT ,
+DayOfWeek INT ,
+DepTime INT ,
+CRSDepTime INT ,
+ArrTime INT ,
+CRSArrTime INT ,
+UC STRING ,
+FlightNum INT ,
+TailNum STRING ,
+ActualElapsedTime INT ,
+CRSElapsedTime INT ,
+AirTime STRING ,
+ArrDelay INT ,
+DepDelay INT ,
+Origin STRING ,
+Dest STRING ,
+Distance INT ,
+TaxiIn STRING ,
+TaxiOut STRING ,
+Cancelled INT ,
+CancellationCode STRING ,
+Diverted INT ,
+CarrierDelay STRING ,
+WeatherDelay STRING ,
+NASDelay STRING ,
+SecurityDelay STRING ,
+LateAircraftDelay STRING)
+PARTITIONED BY (Year INT, Month INT )
+CLUSTERED BY (UC,dest) SORTED BY (FlightNum) INTO 10 BUCKETS
+STORED AS sequencefile;
+
+SET hive.exec.dynamic.partition.mode = nonstrict;
+Set hive.enforce.bucketing = true;
+INSERT OVERWRITE TABLE airline_22.onTimePerf_bucketed_partitioned PARTITION(Year, Month) SELECT DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier, FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin, Dest, Distance, TaxiIn, TaxiOut, Cancelled, CancellationCode, Diverted, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay, Year, Month FROM stg_airline_22.onTimePerf;
+
+--------------------------------------------------------------------------------
+
+
+
+
